@@ -11,6 +11,7 @@
 
 
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def run_ssm_kalman(X, y_init, Q_init, A, Q, C, R, mode='smooth'):
@@ -97,4 +98,8 @@ def run_ssm_kalman(X, y_init, Q_init, A, Q, C, R, mode='smooth'):
         for t in range(t_max - 3, -1, -1):
             V_joint[t] = V_filt[t + 1].dot(J[t].T) + J[t + 1].dot(V_joint[t + 1] - A.dot(V_filt[t + 1])).dot(J[t].T)
 
+
+    plt.plot(likelihood)
+    plt.show() 
     return y_hat, V_hat, V_joint, likelihood
+
